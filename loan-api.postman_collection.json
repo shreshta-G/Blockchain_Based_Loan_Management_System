@@ -1,0 +1,95 @@
+{
+  "info": {
+    "name": "Loan Management API",
+    "_postman_id": "12345678-abcd-efgh-ijkl-987654321000",
+    "description": "API Collection for Blockchain Loan Management System",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Alice\",\n  \"email\": \"alice@example.com\",\n  \"password\": \"password123\",\n  \"role\": \"borrower\"\n}"
+            },
+            "url": { "raw": "http://localhost:5000/api/auth/register", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api", "auth", "register"] }
+          }
+        },
+        {
+          "name": "Login User",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"alice@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": { "raw": "http://localhost:5000/api/auth/login", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api", "auth", "login"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Borrower",
+      "item": [
+        {
+          "name": "Create Loan Request",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": 5000,\n  \"purpose\": \"Start a small business\"\n}"
+            },
+            "url": { "raw": "http://localhost:5000/api/borrower/request-loan", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api", "borrower", "request-loan"] }
+          }
+        },
+        {
+          "name": "View My Loans",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "http://localhost:5000/api/borrower/my-loans", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api", "borrower", "my-loans"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Lender",
+      "item": [
+        {
+          "name": "View All Loan Requests",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{token}}" }],
+            "url": { "raw": "http://localhost:5000/api/lender/loan-requests", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api", "lender", "loan-requests"] }
+          }
+        },
+        {
+          "name": "Fund a Loan",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" },
+              { "key": "Authorization", "value": "Bearer {{token}}" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"loanId\": \"1234567890\",\n  \"amount\": 2000\n}"
+            },
+            "url": { "raw": "http://localhost:5000/api/lender/fund-loan", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api", "lender", "fund-loan"] }
+          }
+        }
+      ]
+    }
+  ]
+}
